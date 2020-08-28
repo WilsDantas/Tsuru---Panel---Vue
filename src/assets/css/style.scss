@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
+
+
+@import './colors.scss';
+@import './nav.scss';
+
+a{
+    text-decoration: none !important;
+    color: black !important;
+}
+a:hover{
+    color: white !important;
+}
+
+.breadcrumb{
+    background-color: white !important;
+}
+
+.card-header{
+    background-color: white !important;
+    border: none;
+}
+
+.breadcrumb-item a:hover{
+    color: $color1 !important;
+}
+
+.border-left-primary {
+    border-left: 0.25rem solid #4e73df !important;
+}
+  
+.border-left-secondary {
+    border-left: 0.25rem solid #858796 !important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a !important;
+}
+  
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
+}
+  
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e !important;
+}
+
+.action-btn{
+    padding: 5px;
+    width: 40px;
+    margin: 2px;
+}
+  
