@@ -10,6 +10,7 @@ export default {
                     const token = response.data.token
                     localStorage.setItem(TOKEN_NAME, token)
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+                    axios.defaults.headers.common['content-type'] = `multipart/forma-data`
                     resolve()
                 }).catch(error => reject(error))
         })
@@ -21,6 +22,7 @@ export default {
                     return reject()
             } else {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+                axios.defaults.headers.common['content-type'] = `multipart/forma-data`
                 axios.get(`${API_VERSION}/me`, {
                     headers: {
                         'Authorization': `Bearer ${token}`

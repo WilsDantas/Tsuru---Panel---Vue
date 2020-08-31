@@ -5,14 +5,14 @@
         <router-link :to="{name: 'dashboard'}">Dashboard</router-link>
       </li>
       <li class="breadcrumb-item active" >
-        <router-link :to="{name: 'products.index'}">Products</router-link>
+        <router-link :to="{name: 'profiles.index'}">Profiles</router-link>
       </li>
     </ol>
     <div class="card-header">
       <div class="d-flex">
-        <span class="card-title p2">Products</span>
+        <span class="card-title p2">Profiles</span>
         <div class="ml-auto p-2">
-          <router-link :to="{name: 'products.create'}" class="btn btn-outline-success justify-content-end rounded-circle" title="Add Product">
+          <router-link :to="{name: 'profiles.create'}" class="btn btn-outline-success justify-content-end rounded-circle" title="Add Profile">
             <i class="fas fa-plus"></i>
           </router-link>
         </div>
@@ -33,51 +33,41 @@
           </select>
         </div>
 
-        <div>
+        <div class="col-3">
           <input
             type="text"
             name="filter"
-            placeholder="Search..."
+            placeholder="Pesquisar..."
             class="form-control"
             v-model="params.search"
           />
         </div>
       </div>
-      <div v-if="products.meta.total != 0">
-        <span>{{products.meta.from}} - {{products.meta.to}} de {{products.meta.total}}</span>
+      <div v-if="profiles.meta.total != 0">
+        <span>{{profiles.meta.from}} - {{profiles.meta.to}} de {{profiles.meta.total}}</span>
       </div>
-      <div class="table-responsive">
-        <table class="table table-condensed">
+
+      <table class="table table-condensed">
         <thead>
           <tr>
-            <th width="40">#</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Description</th>
-            <th width="100"></th>
+            <th>Nome</th>
+            <th width="120">Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="product in products.data"
-            :key="product.identify"
-            :item="product"
-            :path="'products'"
+            v-for="profile in profiles.data"
+            :key="profile.identify"
+            :item="profile"
+            :path="'profiles'"
           >
-            <td v-if="product.images">
-              <img :src="product.images[0].image" :alt="product.name" style="max-width: 40px;" />
-            </td>
-            <td v-else>
-              <img src="@/assets/images/logo.png" alt="logo.tsuru" style="max-width: 40px;" />
-            </td>
-            <td>{{product.name}}</td>
-            <td>U$ {{product.price}}</td>
-            <td>{{product.quantity}}</td>
-            <td v-if="!!product.detail">{{product.detail.description.slice(0, 20)}}</td>
-            <td v-else></td>
             <td>
-                <div style="display: inline-block">
+              <router-link
+                class="link-edit" :to="{name: 'profiles.edit', params: {identify: profile.identify}}"
+              >{{profile.name}}</router-link>
+            </td>
+            <td>
+              <div style="display: inline-block">
                   <router-link :to="{name: 'products.index'}">
                     <a href="#" class="text-danger action-btn" title="delete">
                       <i class="fas fa-trash"></i>
@@ -90,17 +80,15 @@
                       <i class="fas fa-cog"></i>
                     </a>
                     <div class="dropdown-menu border border-dark" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item text-dark" href="#"><strong>SHOW</strong></a>
+                      <a class="dropdown-item text-dark" href="#"><strong>PERMISSIONS</strong></a>
                     </div>
                   </a>
                 </div>
             </td>
           </tr>
+          <pagination-component></pagination-component>
         </tbody>
-        <pagination-component></pagination-component>
-
       </table>
-      </div>
     </div>
   </div>
 </template>
@@ -114,7 +102,8 @@ export default {
     paginationComponent,
   },
   created() {
-    this.$store.dispatch("getProducts", this.params);
+    this.$store.dispatch("checkLogin");
+    this.$store.dispatch("getProfiles", this.params);
   },
   data() {
     return {
@@ -123,27 +112,28 @@ export default {
         search: "",
         page: this.current_page,
       },
+      profile: {},
     };
   },
   computed: {
     ...mapState({
-      products: (state) => state.products.products,
+      profiles: (state) => state.profiles.profiles,
       current_page: (state) => state.paginate.pagination.current_page,
     }),
   },
   watch: {
     "params.per_page"() {
       this.params.page = 1;
-      this.$store.dispatch("getProducts", this.params);
+      this.$store.dispatch("getProfiles", this.params);
     },
     "params.search"() {
       this.params.page = 1;
-      this.$store.dispatch("getProducts", this.params);
+      this.$store.dispatch("getProfiles", this.params);
     },
     current_page() {
       this.params.page = this.current_page;
-      this.$store.dispatch("getProducts", this.params);
+      this.$store.dispatch("getProfiles", this.params);
     },
   },
-}
+};
 </script>

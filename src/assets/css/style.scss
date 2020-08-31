@@ -8,6 +8,10 @@ a{
     text-decoration: none !important;
     color: black !important;
 }
+
+.link-edit:hover{
+    color: black !important;
+}
 a:hover{
     color: white !important;
 }
@@ -50,4 +54,28 @@ a:hover{
     width: 40px;
     margin: 2px;
 }
-  
+
+.error{
+    border-color: red;
+}
+
+.card-title{
+    font-size: 35px;
+}
+
+.card-header{
+    padding-bottom: 0px;
+}
+
+
+.dropzone .dz-remove{
+    border: none !important;
+}
+
+.dropzone .dz-remove i{
+    color: rgb(0, 0, 0);
+}
+
+.dropzone .dz-remove i:hover{
+    color: rgb(255, 253, 253);
+}

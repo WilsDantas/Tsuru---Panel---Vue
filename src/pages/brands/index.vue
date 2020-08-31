@@ -5,14 +5,14 @@
         <router-link :to="{name: 'dashboard'}">Dashboard</router-link>
       </li>
       <li class="breadcrumb-item active" >
-        <router-link :to="{name: 'products.index'}">Products</router-link>
+        <router-link :to="{name: 'brands.index'}">Brands</router-link>
       </li>
     </ol>
     <div class="card-header">
       <div class="d-flex">
-        <span class="card-title p2">Products</span>
+        <span class="card-title p2">Brands</span>
         <div class="ml-auto p-2">
-          <router-link :to="{name: 'products.create'}" class="btn btn-outline-success justify-content-end rounded-circle" title="Add Product">
+          <router-link :to="{name: 'brands.create'}" class="btn btn-outline-success justify-content-end rounded-circle" title="Add Brand">
             <i class="fas fa-plus"></i>
           </router-link>
         </div>
@@ -43,62 +43,37 @@
           />
         </div>
       </div>
-      <div v-if="products.meta.total != 0">
-        <span>{{products.meta.from}} - {{products.meta.to}} de {{products.meta.total}}</span>
+      <div v-if="brands.meta.total != 0">
+        <span>{{brands.meta.from}} - {{brands.meta.to}} de {{brands.meta.total}}</span>
       </div>
       <div class="table-responsive">
-        <table class="table table-condensed">
+        <table class="table table-condensed table-hover table-striped">
         <thead>
           <tr>
-            <th width="40">#</th>
             <th>Name</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Description</th>
-            <th width="100"></th>
+            <th width="50"></th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="product in products.data"
-            :key="product.identify"
-            :item="product"
-            :path="'products'"
-          >
-            <td v-if="product.images">
-              <img :src="product.images[0].image" :alt="product.name" style="max-width: 40px;" />
-            </td>
-            <td v-else>
-              <img src="@/assets/images/logo.png" alt="logo.tsuru" style="max-width: 40px;" />
-            </td>
-            <td>{{product.name}}</td>
-            <td>U$ {{product.price}}</td>
-            <td>{{product.quantity}}</td>
-            <td v-if="!!product.detail">{{product.detail.description.slice(0, 20)}}</td>
-            <td v-else></td>
+            v-for="brand in brands.data"
+            :key="brand.identify"
+            :item="brand"
+            :path="'brand'"
+          > 
+            <td><router-link class="link-edit" :to="{name: 'brands.edit', params: {identify: brand.identify}}">{{brand.name}}</router-link></td>
             <td>
                 <div style="display: inline-block">
-                  <router-link :to="{name: 'products.index'}">
+                  <router-link :to="{name: 'brand.index'}">
                     <a href="#" class="text-danger action-btn" title="delete">
                       <i class="fas fa-trash"></i>
                     </a>
                   </router-link>
                 </div>
-                <div style="display: inline-block">
-                  <a class="dropdown">
-                    <a class="text-secondary action-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                      <i class="fas fa-cog"></i>
-                    </a>
-                    <div class="dropdown-menu border border-dark" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item text-dark" href="#"><strong>SHOW</strong></a>
-                    </div>
-                  </a>
-                </div>
             </td>
           </tr>
         </tbody>
-        <pagination-component></pagination-component>
-
+        <pagination-Component></pagination-Component>
       </table>
       </div>
     </div>
@@ -114,7 +89,7 @@ export default {
     paginationComponent,
   },
   created() {
-    this.$store.dispatch("getProducts", this.params);
+    this.$store.dispatch("getBrands", this.params);
   },
   data() {
     return {
@@ -127,22 +102,22 @@ export default {
   },
   computed: {
     ...mapState({
-      products: (state) => state.products.products,
+      brands: (state) => state.brands.brands,
       current_page: (state) => state.paginate.pagination.current_page,
     }),
   },
   watch: {
     "params.per_page"() {
       this.params.page = 1;
-      this.$store.dispatch("getProducts", this.params);
+      this.$store.dispatch("getBrands", this.params);
     },
     "params.search"() {
       this.params.page = 1;
-      this.$store.dispatch("getProducts", this.params);
+      this.$store.dispatch("getBrands", this.params);
     },
     current_page() {
       this.params.page = this.current_page;
-      this.$store.dispatch("getProducts", this.params);
+      this.$store.dispatch("getBrands", this.params);
     },
   },
 }

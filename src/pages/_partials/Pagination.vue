@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-3 pl-2">
     <nav aria-label="Page navigation example" v-if="pagination.last_page > 1">
       <ul class="pagination">
         <li class="page-item" v-if="pagination.current_page > 1">

@@ -2,8 +2,8 @@
   <div class="container-form">
     <div class="left">
       <div class="header">
-        <h2 class="animation a1">Welcome Back</h2>
-        <h4 class="animation a2">Log in to your account using email and password</h4>
+        <h2>Welcome Back</h2>
+        <h4>Log in to your account using email and password</h4>
       </div>
 
       <form @submit.prevent="login">
@@ -12,7 +12,7 @@
         <input
           type="email"
           :class="{'error': errors.email}"
-          class="form-field animation a3"
+          class="form-field"
           placeholder="Email Address"
           v-model="formData.email"
         />
@@ -20,15 +20,15 @@
         <input
           type="password"
           :class="{'error': errors.password}"
-          class="form-field animation a4"
+          class="form-field"
           placeholder="Password"
           v-model="formData.password"
         />
-        <p class="animation a5">
+        <p>
           <a href="#">Forgot Password</a>
         </p>
-        <button v-if="loading" class="animation a6">LOGIN</button>
-        <button v-else class="animation a6" disabled><i class="fas fa-spinner fa-pulse"></i></button>
+        <button v-if="loading">LOGIN</button>
+        <button v-else disabled><i class="fas fa-spinner fa-pulse"></i></button>
       </form>
     </div>
     <div class="right"></div>

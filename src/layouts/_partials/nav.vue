@@ -15,25 +15,25 @@
         <router-link :to="{name: 'products.index'}" class="nav-link">Products</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Orders</a>
+        <router-link :to="{name: 'orders.index'}" class="nav-link">Orders</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Clients</a>
+        <router-link :to="{name: 'clients.index'}" class="nav-link">Clients</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Categories</a>
+        <router-link :to="{name: 'categories.index'}" class="nav-link">Categories</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Sub Categories</a>
+        <router-link :to="{name: 'subcategories.index'}" class="nav-link">Sub Categories</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Brands</a>
+        <router-link :to="{name: 'brands.index'}" class="nav-link">Brands</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
+        <router-link :to="{name: 'users.index'}" class="nav-link">Users</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Profiles</a>
+        <router-link :to="{name: 'profiles.index'}" class="nav-link">Profiles</router-link>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
