@@ -5,10 +5,10 @@
         <router-link :to="{name: 'dashboard'}">Dashboard</router-link>
       </li>
       <li class="breadcrumb-item active" >
-        <router-link :to="{name: 'categories.index'}">Users</router-link>
+        <router-link :to="{name: 'users.index'}">Users</router-link>
       </li>
       <li class="breadcrumb-item active" >
-        <router-link :to="{name: 'categories.edit'}">Edit</router-link>
+        <router-link :to="{name: 'users.edit'}">Edit</router-link>
       </li>
     </ol>
     <div class="card-header">

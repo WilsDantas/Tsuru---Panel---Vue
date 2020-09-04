@@ -52,6 +52,7 @@
           <tr>
             <th>Name</th>
             <th>Category</th>
+            <th>Products</th>
             <th width="60"></th>
           </tr>
         </thead>
@@ -64,6 +65,7 @@
           > 
             <td><router-link class="link-edit" :to="{name: 'subcategories.edit', params: {identify: subcategory.identify}}">{{subcategory.name}}</router-link></td>
             <td><router-link class="link-edit" :to="{name: 'subcategories.edit', params: {identify: subcategory.identify}}">{{subcategory.category.name}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'subcategories.edit', params: {identify: subcategory.identify}}">{{subcategory.products}}</router-link></td>
             <td>
                 <div style="display: inline-block">
                   <a

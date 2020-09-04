@@ -5,7 +5,9 @@ const state = {
         meta: []
     },
     Allorders: {},
-    order: []
+    order: {
+        client: []
+    }
 }
 
 export default state

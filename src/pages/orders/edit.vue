@@ -20,11 +20,11 @@
             <div class="row">     
               <div class="col-lg-12 pt-12">
                 <div class="form-group">
-                  <label for>Cliente*</label>
+                  <label for>Cliente</label>
                   <div class="text-danger" v-if="errors.name != undefined" >
                     {{this.errors.name[0]}}
                   </div>
-                  <input :class="{'error': errors.name}" type="text" class="form-control" placeholder="Name" v-model="order.client" disabled/>
+                  <input :class="{'error': errors.name}" type="text" class="form-control" placeholder="Name" v-model="order.client.name" disabled/>
                 </div>
               </div>
               <div class="col-lg-12">

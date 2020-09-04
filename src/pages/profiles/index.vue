@@ -51,7 +51,9 @@
         <thead>
           <tr>
             <th>Nome</th>
-            <th width="120">Ações</th>
+            <th>Permissions</th>
+            <th>Users</th>
+            <th width="100">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -67,12 +69,25 @@
               >{{profile.name}}</router-link>
             </td>
             <td>
-              <div style="display: inline-block">
-                  <router-link :to="{name: 'products.index'}">
-                    <a href="#" class="text-danger action-btn" title="delete">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </router-link>
+              <router-link
+                class="link-edit" :to="{name: 'profiles.edit', params: {identify: profile.identify}}"
+              >{{profile.permissions.length}}</router-link>
+            </td>
+            <td>
+              <router-link
+                class="link-edit" :to="{name: 'profiles.edit', params: {identify: profile.identify}}"
+              >{{profile.users}}</router-link>
+            </td>
+            <td>
+                <div style="display: inline-block">
+                  <a
+                    href="#"
+                    @click.prevent="(openModalDestroy(profile))"
+                    class="text-danger mr-1"
+                    title="deletar"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </a>
                 </div>
                 <div style="display: inline-block">
                   <a class="dropdown">
@@ -80,7 +95,9 @@
                       <i class="fas fa-cog"></i>
                     </a>
                     <div class="dropdown-menu border border-dark" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item text-dark" href="#"><strong>PERMISSIONS</strong></a>
+                      <a class="dropdown-item text-dark" href="#"><strong><router-link
+                      class="link-edit" :to="{name: 'profiles.permissions', params: {identify: profile.identify}}"
+                    >PERMISSIONS</router-link></strong></a>
                     </div>
                   </a>
                 </div>
@@ -90,6 +107,68 @@
         </tbody>
       </table>
     </div>
+    <modal
+      name="destroy"
+      class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger"
+      role="document"
+    >
+      <!--Content-->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <p class="heading">
+            Delete Profile:
+            <strong>{{profile.name}}</strong>
+          </p>
+
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            @click.prevent="(closeModalDestroy())"
+          >
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+
+    <!--Body-->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-3">
+              <p></p>
+              <p class="text-center">
+                <i class="fas fa-trash fa-4x"></i>
+              </p>
+            </div>
+
+            <div class="col-9" v-if="profile.users > 0">
+              <p>There are Users linked to this Profile.</p>
+              <p>
+                <strong>it is not possible to delete this Profile. There are Linked Users.</strong>
+              </p>
+            </div>
+
+            <div class="col-9" v-else>
+              <p>Are you sure you want to delete this Profile?</p>
+            </div>
+          </div>
+        </div>
+
+        <!--Footer-->
+        <div
+          class="modal-footer flex-center"
+          style="border: none;"
+          v-if="profile.users == 0"
+        >
+          <a href="#" class="btn btn-danger" v-on:click="destroyProfile(profile.identify)">
+            DELETE
+            <i class="fas fa-trash ml-1 white-text"></i>
+          </a>
+          <a type="button" class="btn btn-warning" @click.prevent="(closeModalDestroy())">Cancel</a>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -120,6 +199,21 @@ export default {
       profiles: (state) => state.profiles.profiles,
       current_page: (state) => state.paginate.pagination.current_page,
     }),
+  },
+  methods: {
+    destroyProfile(identify) {
+      this.$store.dispatch("destroyProfile", identify).then((response) => {
+        this.$store.dispatch("getProfiles", this.params);
+        this.closeModalDestroy();
+      });
+    },
+    openModalDestroy(profile) {
+      this.profile = profile;
+      this.$modal.show("destroy");
+    },
+    closeModalDestroy() {
+      this.$modal.hide("destroy");
+    },
   },
   watch: {
     "params.per_page"() {

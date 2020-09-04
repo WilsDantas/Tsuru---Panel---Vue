@@ -5,7 +5,7 @@ const RESOURCE = 'products'
 
 const CONFIGS = {
     headers: {
-        'content-type': 'multipart/forma-data'
+        'content-type': 'multipart/forma-data',
     }
 }
 
@@ -20,9 +20,14 @@ export default {
 
     createProduct({ commit }, params) {
         return new Promise((resolve, reject) => {
-            axios.post(`${API_VERSION}/${RESOURCE}`, params)
+            axios.post(`${API_VERSION}/${RESOURCE}`, params, {CONFIGS})
                 .then(() => resolve())
                 .catch(error => reject(error))
         })
+    },
+
+    setImage({ commit }, images) {
+        console.log(images)
+        commit('SET_IMAGES', images)
     },
 }

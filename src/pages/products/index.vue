@@ -65,7 +65,7 @@
             :item="product"
             :path="'products'"
           >
-            <td v-if="product.images">
+            <td v-if="product.images[0]">
               <img :src="product.images[0].image" :alt="product.name" style="max-width: 40px;" />
             </td>
             <td v-else>
@@ -107,10 +107,12 @@
 
 
 <script>
+import imagesComponent from "../_partials/Images";
 import paginationComponent from "../_partials/Pagination";
 import { mapState } from "vuex";
 export default {
   components: {
+    imagesComponent,
     paginationComponent,
   },
   created() {

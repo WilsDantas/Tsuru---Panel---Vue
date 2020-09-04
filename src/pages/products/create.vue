@@ -18,7 +18,12 @@
         <div class="card-body">
           <form @submit.prevent="createProduct" class="form" method="POST" enctype="multipart/form-data">
             <div class="row">            
-
+              <div class="col-lg-12">
+                <div class="text-danger" v-if="errors.images != undefined" >
+                    {{this.errors.images[0]}}
+                  </div>
+                <images-component></images-component>
+              </div>
 
 
               <div class="col-lg-12 pt-3">
@@ -173,8 +178,12 @@
 
 
 <script>
+import imagesComponent from "../_partials/Images";
 import { mapState } from "vuex";
 export default {
+  components: {
+    imagesComponent,
+  },
   data() {
     return {
       formData: {},
@@ -187,14 +196,18 @@ export default {
   },
   computed: {
     ...mapState({
+      images: (state) => state.products.images,
       Allsubcategories: (state) => state.subcategories.AllSubCategories,
       Allbrands: (state) => state.brands.Allbrands,
     }),
   },
   methods: {
     createProduct() {
+      delete this.images['length'];
+      const formData = new FormData()
+      formData.append('name', this.formData.name)
       this.$store
-        .dispatch("createProduct", this.formData)
+        .dispatch("createProduct", formData)
         .then((response) => {
           this.$router.push({ name: "products.index" });
         })

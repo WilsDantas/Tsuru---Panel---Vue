@@ -38,6 +38,14 @@ export default {
         })
     },
 
+    destroyProfile({ commit }, identify) {
+        return new Promise((resolve, reject) => {
+            axios.delete(`${API_VERSION}/${RESOURCE}/${identify}`)
+                .then(() => {resolve()})
+                .catch(error => reject(error))
+        })
+    },
+
     createProfile({ commit }, params) {
         return new Promise((resolve, reject) => {
             axios.post(`${API_VERSION}/${RESOURCE}`, params)
@@ -45,4 +53,12 @@ export default {
                 .catch(error => reject(error))
         })
     },
+
+    editProfilePermissions(context, params) {
+        return new Promise((resolve, reject) => {
+            return axios.put(`${API_VERSION}/${RESOURCE}/AttachPermissions/${params.identify}`, params)
+                .then(() => { resolve() })
+                .catch(error => reject(error))
+        })
+    }
 }

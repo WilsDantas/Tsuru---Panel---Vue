@@ -116,7 +116,7 @@
                     aria-labelledby="dropdownMenuButton"
                   >
                     <a class="dropdown-item text-dark" href="#">
-                      <strong>SHOW</strong>
+                      <a class="dropdown-item text-dark" href="#"><strong><router-link class="link-edit" :to="{name: 'users.show', params: {identify: user.identify}}">SHOW</router-link></strong></a>
                     </a>
                   </div>
                 </a>

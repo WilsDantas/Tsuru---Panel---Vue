@@ -46,6 +46,7 @@
         <thead>
           <tr>
             <th>Client</th>
+            <th>Email</th>
             <th>Total</th>
             <th>Status</th>
             <th>Products</th>
@@ -59,19 +60,21 @@
             :item="order"
             :path="'order'"
           > 
-            <td><router-link class="link-edit" :to="{name: 'orders.edit', params: {identify: order.identify}}">{{order.client}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'orders.edit', params: {identify: order.identify}}">{{order.client.name}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'orders.edit', params: {identify: order.identify}}">{{order.client.email}}</router-link></td>
             <td><router-link class="link-edit" :to="{name: 'orders.edit', params: {identify: order.identify}}">{{order.total}}</router-link></td>
             <td><router-link class="link-edit" :to="{name: 'orders.edit', params: {identify: order.identify}}">{{order.status}}</router-link></td>
             <td><router-link class="link-edit" :to="{name: 'orders.edit', params: {identify: order.identify}}">{{order.products.length}}</router-link></td>
-
-            
             <td>
-                <div style="display: inline-block">
-                  <router-link :to="{name: 'orders.index'}">
-                    <a href="#" class="text-danger action-btn" title="delete">
-                      <i class="fas fa-trash"></i>
+                <div>
+                  <a class="dropdown">
+                    <a class="text-secondary action-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                      <i class="fas fa-cog"></i>
                     </a>
-                  </router-link>
+                    <div class="dropdown-menu border border-dark" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item text-dark" href="#"><strong><router-link class="link-edit" :to="{name: 'orders.show', params: {identify: order.identify}}">SHOW</router-link></strong></a>
+                    </div>
+                  </a>
                 </div>
             </td>
           </tr>

@@ -6,6 +6,7 @@ import auth from './modules/auth'
 import brands from './modules/brands'
 import clients from './modules/clients'
 import users from './modules/users'
+import permissions from './modules/permissions'
 import orders from './modules/orders'
 import profiles from './modules/profiles'
 import subcategories from './modules/subCategories'
@@ -27,6 +28,7 @@ const store = new Vuex.Store({
         profiles,
         clients,
         users,
+        permissions,
     }
 })
 

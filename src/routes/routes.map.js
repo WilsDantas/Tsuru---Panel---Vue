@@ -12,12 +12,15 @@ import categoriesEdit from '@/pages/categories/edit'
 import profiles from '@/pages/profiles'
 import profilesCreate from '@/pages/profiles/create'
 import profilesEdit from '@/pages/profiles/edit'
+import profilesPermissions from '@/pages/profiles/permissions'
 
 import clients from '@/pages/clients'
 import clientsEdit from '@/pages/clients/edit'
+import clientsShow from '@/pages/clients/show'
 
 import orders from '@/pages/orders'
 import ordersEdit from '@/pages/orders/edit'
+import ordersShow from '@/pages/orders/show'
 
 import brands from '@/pages/brands'
 import brandsCreate from '@/pages/brands/create'
@@ -30,6 +33,8 @@ import subcategoriesEdit from '@/pages/subcategories/edit'
 import users from '@/pages/users'
 import usersCreate from '@/pages/users/create'
 import usersEdit from '@/pages/users/edit'
+import usersShow from '@/pages/users/show'
+
 
 
 const routes = [
@@ -143,6 +148,15 @@ const routes = [
                     title: 'Tsuru - User Edit'
                 }
             },
+            {
+                path: '/users/:identify',
+                component: usersShow,
+                name: 'users.show',
+                props: true,
+                meta: {
+                    title: 'Tsuru - User Show'
+                }
+            },
 
             //Profiles
 
@@ -169,6 +183,15 @@ const routes = [
                 props: true,
                 meta: {
                     title: 'Tsuru - Profile Edit'
+                }
+            },
+            {
+                path: '/profiles/:identify/permissions',
+                component: profilesPermissions,
+                name: 'profiles.permissions',
+                props: true,
+                meta: {
+                    title: 'Tsuru - Profile Permissions'
                 }
             },
 
@@ -219,8 +242,17 @@ const routes = [
                     title: 'Tsuru - Client Edit'
                 }
             },
+            {
+                path: '/clients/:identify',
+                component: clientsShow,
+                name: 'clients.show',
+                props: true,
+                meta: {
+                    title: 'Tsuru - Client Show'
+                }
+            },
 
-            //Clients
+            //Orders
 
             {
                 path: '/orders',
@@ -237,6 +269,15 @@ const routes = [
                 props: true,
                 meta: {
                     title: 'Tsuru - Order Edit'
+                }
+            },
+            {
+                path: '/orders/:identify',
+                component: ordersShow,
+                name: 'orders.show',
+                props: true,
+                meta: {
+                    title: 'Tsuru - Order Show'
                 }
             }
         ],

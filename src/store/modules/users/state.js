@@ -5,6 +5,7 @@ const state = {
         meta: [],
     },
     user: {
+        salary: '',
         profile: {}
     },
 }

@@ -11,6 +11,6 @@ const formatDate = (CurrentDate) => {
     return dayF+'/'+monthF+'/'+yearF
 }
 
-const formatPrice = (price) => price.toLocaleString('pt-br', {minimumFractionDigits: 2})
+const formatPrice = (price) => price.toLocaleString('en-us', {minimumFractionDigits: 2})
 Vue.filter('dateformat', formatDate)
 Vue.filter('formatprice', formatPrice)

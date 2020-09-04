@@ -66,10 +66,10 @@
             <td v-else>
               <img src="@/assets/images/logo.png" alt="logo.tsuru" style="max-width: 40px;" />
             </td>
-            <td><router-link class="link-edit" :to="{name: 'client.edit', params: {identify: client.identify}}">{{client.name}}</router-link></td>
-            <td><router-link class="link-edit" :to="{name: 'client.edit', params: {identify: client.identify}}">{{client.email}}</router-link></td>
-            <td><router-link class="link-edit" :to="{name: 'client.edit', params: {identify: client.identify}}">{{client.phone}}</router-link></td>
-            <td><router-link class="link-edit" :to="{name: 'client.edit', params: {identify: client.identify}}">{{client.orders.length}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'clients.edit', params: {identify: client.identify}}">{{client.name}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'clients.edit', params: {identify: client.identify}}">{{client.email}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'clients.edit', params: {identify: client.identify}}">{{client.phone}}</router-link></td>
+            <td><router-link class="link-edit" :to="{name: 'clients.edit', params: {identify: client.identify}}">{{client.orders.length}}</router-link></td>
             <td>
                 <div style="display: inline-block">
                   <a class="dropdown">
@@ -77,7 +77,7 @@
                       <i class="fas fa-cog"></i>
                     </a>
                     <div class="dropdown-menu border border-dark" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item text-dark" href="#"><strong>SHOW</strong></a>
+                      <a class="dropdown-item text-dark" href="#"><strong><router-link class="link-edit" :to="{name: 'clients.show', params: {identify: client.identify}}">SHOW</router-link></strong></a>
                     </div>
                   </a>
                 </div>

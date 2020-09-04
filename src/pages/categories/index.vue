@@ -66,11 +66,14 @@
             <td><router-link class="link-edit" :to="{name: 'categories.edit', params: {identify: category.identify}}">{{category.subcategories}}</router-link></td>
             <td>
                 <div style="display: inline-block">
-                  <router-link :to="{name: 'categories.index'}">
-                    <a href="#" class="text-danger action-btn" title="delete">
-                      <i class="fas fa-trash"></i>
-                    </a>
-                  </router-link>
+                  <a
+                    href="#"
+                    @click.prevent="(openModalDestroy(category))"
+                    class="text-danger mr-1"
+                    title="deletar"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </a>
                 </div>
             </td>
           </tr>
@@ -79,6 +82,69 @@
       </table>
       </div>
     </div>
+
+    <modal
+      name="destroy"
+      class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger"
+      role="document"
+    >
+      <!--Content-->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <p class="heading">
+            Delete Category:
+            <strong>{{category.name}}</strong>
+          </p>
+
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            @click.prevent="(closeModalDestroy())"
+          >
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+
+    <!--Body-->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-3">
+              <p></p>
+              <p class="text-center">
+                <i class="fas fa-trash fa-4x"></i>
+              </p>
+            </div>
+
+            <div class="col-9" v-if="category.subcategories > 0">
+              <p>There are Sub Categories linked to this Category.</p>
+              <p>
+                <strong>it is not possible to delete this category. There are Linked Sub Categories.</strong>
+              </p>
+            </div>
+
+            <div class="col-9" v-else>
+              <p>Are you sure you want to delete this Sub Category?</p>
+            </div>
+          </div>
+        </div>
+
+        <!--Footer-->
+        <div
+          class="modal-footer flex-center"
+          style="border: none;"
+          v-if="category.subcategories == 0"
+        >
+          <a href="#" class="btn btn-danger" v-on:click="destroyCategory(category.identify)">
+            DELETE
+            <i class="fas fa-trash ml-1 white-text"></i>
+          </a>
+          <a type="button" class="btn btn-warning" @click.prevent="(closeModalDestroy())">Cancel</a>
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -100,6 +166,7 @@ export default {
         search: "",
         page: this.current_page,
       },
+      category: {},
     };
   },
   computed: {
@@ -107,6 +174,21 @@ export default {
       categories: (state) => state.categories.categories,
       current_page: (state) => state.paginate.pagination.current_page,
     }),
+  },
+  methods: {
+    destroyCategory(identify) {
+      this.$store.dispatch("destroyCategory", identify).then((response) => {
+        this.$store.dispatch("getCategories", this.params);
+        this.closeModalDestroy();
+      });
+    },
+    openModalDestroy(category) {
+      this.category = category;
+      this.$modal.show("destroy");
+    },
+    closeModalDestroy() {
+      this.$modal.hide("destroy");
+    },
   },
   watch: {
     "params.per_page"() {

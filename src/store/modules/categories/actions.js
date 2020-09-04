@@ -41,4 +41,12 @@ export default {
                 .catch(error => reject(error))
         })
     },
+
+    destroyCategory({ commit }, identify) {
+        return new Promise((resolve, reject) => {
+            axios.delete(`${API_VERSION}/${RESOURCE}/${identify}`)
+                .then(() => {resolve()})
+                .catch(error => reject(error))
+        })
+    },
 }
